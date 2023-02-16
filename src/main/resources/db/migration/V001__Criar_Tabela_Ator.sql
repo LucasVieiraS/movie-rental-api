@@ -1,3 +1,4 @@
 CREATE TABLE IF NOT EXISTS Ator (
     id BIGINT NOT NULL,
+    nome VARCHAR NOT NULL,
 );

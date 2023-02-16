@@ -15,9 +15,9 @@ public class Filmes {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
-    @OneToMany(mappedBy = "enredo")
+    @OneToMany(mappedBy = "genero")
     @JsonIgnore
-    private List<Enredo> enredo = new ArrayList<>();
+    private List<Genero> genero = new ArrayList<>();
 
     @OneToMany(mappedBy = "ator")
     @JsonIgnore
@@ -35,12 +35,12 @@ public class Filmes {
         Id = id;
     }
 
-    public List<Enredo> getEnredo() {
-        return enredo;
+    public List<Genero> getEnredo() {
+        return genero;
     }
 
-    public void setEnredo(List<Enredo> enredo) {
-        this.enredo = enredo;
+    public void setEnredo(List<Genero> enredo) {
+        this.genero = enredo;
     }
 
     public List<Ator> getAtor() {

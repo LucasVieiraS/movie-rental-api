@@ -1,15 +1,11 @@
 package br.com.etec.lucas.locadoraApi.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name="enredo")
-public class Enredo {
+@Table(name="genero")
+public class Genero {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,8 +45,8 @@ public class Enredo {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Enredo enredo = (Enredo) o;
-        return Id.equals(enredo.Id);
+        Genero genero = (Genero) o;
+        return Id.equals(genero.Id);
     }
 
     @Override
