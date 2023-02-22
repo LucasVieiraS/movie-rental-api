@@ -12,43 +12,25 @@ import java.util.Objects;
 public class Filmes {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private Long id;
 
-    @OneToMany(mappedBy = "genero")
-    @JsonIgnore
-    private List<Genero> genero = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name="idgenero")
+    private Genero genero;
 
-    @OneToMany(mappedBy = "ator")
-    @JsonIgnore
-    private List<Ator> ator = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name="idator")
+    private Ator ator;
 
     private String nomefilme;
-    private Long idgenero;
-    private Long idator;
 
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Long id) {
-        Id = id;
-    }
-
-    public List<Genero> getEnredo() {
-        return genero;
-    }
-
-    public void setEnredo(List<Genero> enredo) {
-        this.genero = enredo;
-    }
-
-    public List<Ator> getAtor() {
-        return ator;
-    }
-
-    public void setAtor(List<Ator> ator) {
-        this.ator = ator;
+        this.id = id;
     }
 
     public String getNomefilme() {
@@ -59,20 +41,20 @@ public class Filmes {
         this.nomefilme = nomefilme;
     }
 
-    public Long getIdgenero() {
-        return idgenero;
+    public Ator getAtor() {
+        return ator;
     }
 
-    public void setIdgenero(Long idgenero) {
-        this.idgenero = idgenero;
+    public void setAtor(Ator ator) {
+        this.ator = ator;
     }
 
-    public Long getIdator() {
-        return idator;
+    public Genero getGenero() {
+        return genero;
     }
 
-    public void setIdator(Long idator) {
-        this.idator = idator;
+    public void setGenero(Genero genero) {
+        this.genero = genero;
     }
 
     @Override
@@ -80,11 +62,11 @@ public class Filmes {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Filmes filmes = (Filmes) o;
-        return Id.equals(filmes.Id);
+        return id.equals(filmes.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(Id);
+        return Objects.hash(id);
     }
 }

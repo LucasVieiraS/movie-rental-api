@@ -1,14 +1,9 @@
-ALTER TABLE Filmes
-ADD CONSTRAINT FK_Filmes_Genero
+ALTER TABLE filmes
+ADD CONSTRAINT FK_filmes_genero
 FOREIGN KEY(idgenero)
-REFERENCES Filmes(id);
+REFERENCES genero(id);
 
-ALTER TABLE Filmes
-ADD CONSTRAINT FK_Filmes_Ator
+ALTER TABLE filmes
+ADD CONSTRAINT FK_filmes_ator
 FOREIGN KEY(idator)
-REFERENCES Ator(id);
-
-INSERT INTO Contato(clienteid, descricao, contato)
-VALUES  (1, "Encanador", "+(55) 14 99610-2925"),
-        (2, "Jogador de Basquete", "+(55) 14 99723-3221"),
-        (3, "Jogador de Baseball", "+(55) 14 99326-1728");
+REFERENCES ator(id);

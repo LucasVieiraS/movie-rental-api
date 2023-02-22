@@ -13,27 +13,27 @@ public class Ator {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "filmesid")
-    private Filmes filmes;
+    @OneToMany(mappedBy="ator")
+    @JsonIgnore
+    private List<Filmes> filmes = new ArrayList<>();
 
     private String nome;
 
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Long id) {
-        Id = id;
+        id = id;
     }
 
-    public Filmes getFilmes() {
+    public List<Filmes> getFilmes() {
         return filmes;
     }
 
-    public void setFilmes(Filmes filmes) {
+    public void setFilmes(List<Filmes> filmes) {
         this.filmes = filmes;
     }
 
@@ -50,11 +50,11 @@ public class Ator {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Ator ator = (Ator) o;
-        return Id.equals(ator.Id);
+        return id.equals(ator.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(Id);
+        return Objects.hash(id);
     }
 }

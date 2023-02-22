@@ -1,5 +1,0 @@
-CREATE TABLE IF NOT EXISTS Enredo (
-    id BIGINT NOT NULL,
-    descricao VARCHAR NOT NULL,
-    PRIMARY KEY(id)
-);
