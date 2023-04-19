@@ -3,6 +3,7 @@ package br.com.etec.lucas.locadoraApi.resource;
 import br.com.etec.lucas.locadoraApi.model.Genero;
 import br.com.etec.lucas.locadoraApi.repository.GeneroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,6 +17,6 @@ public class GeneroResource {
 
     @RequestMapping("/todos")
     public List<Genero> listarTodosGeneros() {
-        return generoRepository.findAll();
+        return generoRepository.findAll(Sort.by("descricao"));
     }
 }
