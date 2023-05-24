@@ -4,6 +4,7 @@ import br.com.etec.lucas.locadoraApi.model.Genero;
 import br.com.etec.lucas.locadoraApi.repository.filter.GeneroFilter;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
 import javax.persistence.EntityManager;
@@ -15,7 +16,6 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class GeneroRepositoryImpl implements GeneroRepositoryQuery {
 
@@ -28,16 +28,29 @@ public class GeneroRepositoryImpl implements GeneroRepositoryQuery {
     CriteriaQuery<Genero> criteria = builder.createQuery(Genero.class);
     Root<Genero> root = criteria.from(Genero.class);
 
-    Predicate[] predicates = criarRestricoes(generoFilter, builder, root);
+    Predicate[] predicates = createRestrictions(generoFilter, builder, root);
     criteria.where(predicates);
     criteria.orderBy(builder.asc(root.get("descricao")));
 
     TypedQuery<Genero> query = manager.createQuery(criteria);
-
-    return null;
+    return new PageImpl<>(query.getResultList(), pageable, getTotal(generoFilter));
   }
 
-  private Predicate[] criarRestricoes(GeneroFilter generoFilter, CriteriaBuilder builder, Root<Genero> root) {
+  private Long getTotal(GeneroFilter generoFilter) {
+    CriteriaBuilder builder = manager.getCriteriaBuilder();
+    CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
+    Root<Genero> root = criteria.from(Genero.class);
+
+    Predicate[] predicates = createRestrictions(generoFilter, builder, root);
+    criteria.where(predicates);
+    criteria.orderBy(builder.asc(root.get("descricao")));
+
+    criteria.select(builder.count(root));
+
+    return manager.createQuery(criteria).getSingleResult();
+  }
+
+  private Predicate[] createRestrictions(GeneroFilter generoFilter, CriteriaBuilder builder, Root<Genero> root) {
     List<Predicate> predicates = new ArrayList<>();
 
     if (!StringUtils.isEmpty(generoFilter.getDescricao())) {
