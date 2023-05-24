@@ -31,7 +31,7 @@ public class AtorRepositoryImpl implements AtorRepositoryQuery {
 
     Predicate[] predicates = createRestrictions(atorFilter, builder, root);
     criteria.where(predicates);
-    criteria.orderBy(builder.asc(root.get("descricao")));
+    criteria.orderBy(builder.asc(root.get("nome")));
 
     TypedQuery<Ator> query = manager.createQuery(criteria);
     addPaginationRestrictions(query, pageable);
@@ -46,7 +46,7 @@ public class AtorRepositoryImpl implements AtorRepositoryQuery {
 
     Predicate[] predicates = createRestrictions(atorFilter, builder, root);
     criteria.where(predicates);
-    criteria.orderBy(builder.asc(root.get("descricao")));
+    criteria.orderBy(builder.asc(root.get("nome")));
 
     criteria.select(builder.count(root));
 
@@ -60,8 +60,6 @@ public class AtorRepositoryImpl implements AtorRepositoryQuery {
 
     query.setFirstResult(firstPageRegister);
     query.setMaxResults(totalRegistersPerPage);
-
-
   }
 
   private Predicate[] createRestrictions(AtorFilter atorFilter, CriteriaBuilder builder, Root<Ator> root) {
@@ -70,7 +68,7 @@ public class AtorRepositoryImpl implements AtorRepositoryQuery {
     if (!StringUtils.isEmpty(atorFilter.getNome())) {
       predicates.add(
         builder.like(
-          builder.lower(root.get("descricao")),
+          builder.lower(root.get("nome")),
           "%" + atorFilter.getNome().toLowerCase() + '%'
         )
       );

@@ -21,7 +21,7 @@ public class GeneroResource {
     @Autowired
     public GeneroRepository generoRepository;
 
-    @RequestMapping("/todos")
+    @GetMapping("/todos")
     public List<Genero> listarTodosGeneros() {
         return generoRepository.findAll(Sort.by("descricao").ascending());
     }

@@ -33,7 +33,18 @@ public class GeneroRepositoryImpl implements GeneroRepositoryQuery {
     criteria.orderBy(builder.asc(root.get("descricao")));
 
     TypedQuery<Genero> query = manager.createQuery(criteria);
+    addPaginationRestrictions(query, pageable);
+
     return new PageImpl<>(query.getResultList(), pageable, getTotal(generoFilter));
+  }
+
+  private void addPaginationRestrictions(TypedQuery<?> query, Pageable pageable) {
+    int currentPage = pageable.getPageNumber();
+    int totalRegistersPerPage = pageable.getPageSize();
+    int firstPageRegister = currentPage * totalRegistersPerPage;
+
+    query.setFirstResult(firstPageRegister);
+    query.setMaxResults(totalRegistersPerPage);
   }
 
   private Long getTotal(GeneroFilter generoFilter) {
