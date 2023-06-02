@@ -6,6 +6,7 @@ import br.com.etec.lucas.locadoraApi.repository.filter.AtorFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,7 +21,7 @@ public class AtorResource {
 
     @GetMapping("/todos")
     public List<Ator> listarTodosAtores() {
-        return atorRepository.findAll();
+        return atorRepository.findAll(Sort.by("nome").ascending());
     }
 
     @GetMapping()
