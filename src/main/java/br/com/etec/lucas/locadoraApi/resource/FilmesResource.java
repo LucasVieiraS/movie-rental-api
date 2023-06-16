@@ -5,6 +5,7 @@ import br.com.etec.lucas.locadoraApi.model.Filmes;
 import br.com.etec.lucas.locadoraApi.repository.FilmesRepository;
 import br.com.etec.lucas.locadoraApi.repository.filter.AtorFilter;
 import br.com.etec.lucas.locadoraApi.repository.filter.FilmesFilter;
+import br.com.etec.lucas.locadoraApi.repository.projections.FilmesDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,7 +28,7 @@ public class FilmesResource {
     }
 
     @GetMapping()
-    public Page<Filmes> pesquisar(FilmesFilter filmesFilter, Pageable pageable) {
+    public Page<FilmesDTO> pesquisar(FilmesFilter filmesFilter, Pageable pageable) {
       return filmesRepository.filter(filmesFilter, pageable);
     }
 }
